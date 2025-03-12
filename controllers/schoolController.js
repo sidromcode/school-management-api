@@ -1,11 +1,11 @@
 const pool = require('../db');
 
-// Add School API
+
 exports.addSchool = async (req, res) => {
     try {
         const { name, address, latitude, longitude } = req.body;
 
-        // Validation
+        
         if (!name || !address || !latitude || !longitude) {
             return res.status(400).json({ message: 'All fields are required' });
         }
@@ -19,7 +19,7 @@ exports.addSchool = async (req, res) => {
     }
 };
 
-// List Schools API (sorted by proximity)
+
 exports.listSchools = async (req, res) => {
     try {
         const { latitude, longitude } = req.query;
@@ -30,7 +30,7 @@ exports.listSchools = async (req, res) => {
 
         const [schools] = await pool.query('SELECT * FROM schools');
 
-        // Haversine formula for calculating distance
+        
         const calculateDistance = (lat1, lon1, lat2, lon2) => {
             const toRad = (angle) => (Math.PI * angle) / 180;
             const R = 6371; // Radius of Earth in km
@@ -44,10 +44,10 @@ exports.listSchools = async (req, res) => {
                 Math.sin(dLon / 2) * Math.sin(dLon / 2);
 
             const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-            return R * c; // Distance in km
+            return R * c;
         };
 
-        // Sort schools by proximity
+        
         const sortedSchools = schools.map((school) => ({
             ...school,
             distance: calculateDistance(latitude, longitude, school.latitude, school.longitude)
