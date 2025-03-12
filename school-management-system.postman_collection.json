@@ -1,42 +1,91 @@
 {
-	"info": {
-		"_postman_id": "41df5b1d-fc70-4c8f-98fb-bc72290e7fc0",
-		"name": "school-management-system",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "36776392"
-	},
-	"item": [
-		{
-			"name": "add school",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"name\": \"ABC School\",\r\n  \"address\": \"123 Street, City\",\r\n  \"latitude\": 12.9716,\r\n  \"longitude\": 77.5946\r\n}\r\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/api/addSchool",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"addSchool"
-					]
-				}
-			},
-			"response": []
-		}
-	]
+    "info": {
+        "_postman_id": "41df5b1d-fc70-4c8f-98fb-bc72290e7fc0",
+        "name": "school-management-system",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "_exporter_id": "36776392"
+    },
+    "item": [
+        {
+            "name": "Add School",
+            "request": {
+                "auth": {
+                    "type": "noauth"
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"name\": \"ABC School\",\n  \"address\": \"123 Street, City\",\n  \"latitude\": 12.9716,\n  \"longitude\": 77.5946\n}\n",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "http://localhost:3000/api/addSchool",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3000",
+                    "path": [
+                        "api",
+                        "addSchool"
+                    ]
+                }
+            },
+            "response": [
+                {
+                    "name": "Success Response",
+                    "status": "200 OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "body": "{\n    \"message\": \"School added successfully\"\n}"
+                }
+            ]
+        },
+        {
+            "name": "Get All Schools (Sorted by Proximity)",
+            "request": {
+                "auth": {
+                    "type": "noauth"
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost:3000/api/listSchools?latitude=12.9716&longitude=77.5946",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3000",
+                    "path": [
+                        "api",
+                        "listSchools"
+                    ],
+                    "query": [
+                        {
+                            "key": "latitude",
+                            "value": "12.9716"
+                        },
+                        {
+                            "key": "longitude",
+                            "value": "77.5946"
+                        }
+                    ]
+                }
+            },
+            "response": [
+                {
+                    "name": "Success Response",
+                    "status": "200 OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "body": "[\n  {\n    \"id\": 1,\n    \"name\": \"ABC School\",\n    \"address\": \"123 Street, City\",\n    \"latitude\": 12.9716,\n    \"longitude\": 77.5946,\n    \"distance\": \"0.5 km\"\n  },\n  {\n    \"id\": 2,\n    \"name\": \"XYZ School\",\n    \"address\": \"456 Avenue, City\",\n    \"latitude\": 13.0358,\n    \"longitude\": 77.5970,\n    \"distance\": \"3.2 km\"\n  }\n]"
+                }
+            ]
+        }
+    ]
 }
